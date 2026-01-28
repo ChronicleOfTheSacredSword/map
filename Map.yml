@@ -1,1 +1,46 @@
-
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Map Service
+servers:
+  - url: http://localhost:8080
+paths:
+  /map/{position}:
+    get:
+      summary: Récupérer les informations d'une carte à partir de sa position dans la grille
+      operationId: rechercherCarte
+      tags:
+        - Map
+      parameters:
+        - name: position
+          in: path
+          required: true
+          description: La position de la carte recherchée dans la grille générale
+          schema:
+            type: string
+      responses:
+        '200':
+          description: La carte a été trouvée
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Map"
+components:
+  schemas:
+    Map:
+      required:
+        - id_map
+        - position
+        - url
+        - mobs
+      properties:
+        id_map:
+          type: number
+        position:
+          type: string
+        url:
+          type: string
+        mobs:
+          type: array
+          items:
+            type: number
