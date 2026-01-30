@@ -1,0 +1,20 @@
+networks:
+  pg-net:
+    external: true
+
+services:
+  qualite-redis:
+    image: redis:7.2-alpine
+    container_name: qualite-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - pg-net
+    environment:
+      - TZ=Europe/Paris
+    volumes:
+      - redisdata:/data
+    command: redis-server --save 60 1 --requirepass qualitedev
+
+volumes:
+  redisdata:

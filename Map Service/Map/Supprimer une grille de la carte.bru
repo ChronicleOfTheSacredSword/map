@@ -1,0 +1,51 @@
+meta {
+  name: Supprimer une grille de la carte
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{baseUrl}}/map/:position
+  body: none
+  auth: inherit
+}
+
+params:path {
+  position: 
+}
+
+example {
+  name: 200 Response
+  description: La carte a été suprpimée
+  
+  request: {
+    url: {{baseUrl}}/map/:position
+    method: DELETE
+    mode: none
+    params:path: {
+      position: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "id": "",
+          "url": "",
+          "mobs": []
+        }
+      '''
+    }
+  }
+}

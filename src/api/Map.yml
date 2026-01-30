@@ -1,0 +1,81 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Map Service
+servers:
+  - url: http://localhost:8080
+paths:
+  /map:
+    post:
+      summary: Ajouter une nouvelle carte
+      operationId: insertMap
+      tags:
+        - Map
+      responses:
+        '201':
+          description: La carte a bien été ajoutée
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Map"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Map"
+        description: Carte à ajouter
+  /map/{position}:
+    get:
+      summary: Récupérer les informations d'une carte à partir de sa position dans la grille
+      operationId: rechercherCarte
+      tags:
+        - Map
+      parameters:
+        - name: position
+          in: path
+          required: true
+          description: La position de la carte recherchée dans la grille générale
+          schema:
+            type: string
+      responses:
+        '200':
+          description: La carte a été trouvée
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Map"
+    delete:
+      summary: Supprimer une grille de la carte
+      operationId: deleteMap
+      tags:
+        - Map
+      parameters:
+        - name: position
+          in: path
+          required: true
+          description: La position de la carte dans la grille générale
+          schema:
+            type: string
+      responses:
+        '200':
+          description: La carte a été suprpimée
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Map"
+components:
+  schemas:
+    Map:
+      required:
+        - id
+        - url
+        - mobs
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+        mobs:
+          type: array
+          items:
+            type: number

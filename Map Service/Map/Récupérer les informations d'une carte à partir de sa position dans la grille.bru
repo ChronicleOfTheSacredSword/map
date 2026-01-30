@@ -1,0 +1,51 @@
+meta {
+  name: Récupérer les informations d'une carte à partir de sa position dans la grille
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/map/:position
+  body: none
+  auth: inherit
+}
+
+params:path {
+  position: 
+}
+
+example {
+  name: 200 Response
+  description: La carte a été trouvée
+  
+  request: {
+    url: {{baseUrl}}/map/:position
+    method: GET
+    mode: none
+    params:path: {
+      position: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "id": "",
+          "url": "",
+          "mobs": []
+        }
+      '''
+    }
+  }
+}
