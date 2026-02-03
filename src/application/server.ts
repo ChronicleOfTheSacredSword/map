@@ -10,8 +10,11 @@ import {MapService} from "../domain/services/MapService";
 import {MapController} from "../presentation/controllers/MapController";
 
 
+const cors = require('cors');
 const app = express();
 app.use(express.json());
+app.use(cors({ origin: 'http://localhost:9000' }));
+
 
 
 const file  = fs.readFileSync(require.resolve('../api/Map.yml'), 'utf8')
